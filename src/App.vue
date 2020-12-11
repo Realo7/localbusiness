@@ -1,31 +1,38 @@
+<template>
+  <div id="app">
+    <router-view />
+  </div>
+</template>
+
 <script>
-import HelloWorld from './components/HelloWorld.vue';
+// import HelloWorld from './components/HelloWorld.vue';
 
 export default {
   name: 'App',
-  components: {
-    HelloWorld,
-  },
+  components: {},
   created() {
     console.log(process.env.VUE_APP_BASE_URL);
   },
 };
 </script>
 
-<template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png" />
-    <HelloWorld msg="Welcome to Your Vue.js App" />
-  </div>
-</template>
-
 <style>
+@import '../src/assets/css/resetcss.css';
 #app {
   font-family: Avenir, Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  background: #efefef;
+  min-height: 100%;
+}
+
+html {
+  height: 100%;
+  font-size: 100px;
+}
+body {
+  /* rem是相对于根元素html的大小 */
+  font-size: 0.14rem;
+  height: 100%;
 }
 </style>
