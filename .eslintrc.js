@@ -22,5 +22,12 @@ module.exports = {
         order: [['template', 'script'], 'style'],
       },
     ],
+    'vue/no-duplicate-attributes': [
+      'error',
+      {
+        allowCoexistClass: true,
+        allowCoexistStyle: true,
+      },
+    ],
   },
 };

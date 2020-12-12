@@ -1,15 +1,16 @@
 <template>
   <div id="app">
     <router-view />
+    <MyTabbar></MyTabbar>
   </div>
 </template>
 
 <script>
 // import HelloWorld from './components/HelloWorld.vue';
-
+import MyTabbar from '@/components/MyTabbar';
 export default {
   name: 'App',
-  components: {},
+  components: { MyTabbar },
   created() {
     console.log(process.env.VUE_APP_BASE_URL);
   },
