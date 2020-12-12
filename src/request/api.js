@@ -4,7 +4,7 @@ import request from './request';
 export const GetMall = (param) => request.get('/shopinfo/getMall', { params: param });
 
 // 获取商铺列表
-export const GetShop = () => request.get('/shopinfo/getShopByMall');
+export const GetShop = (param) => request.get('/shopinfo/getShopByMall', { params: param });
 
 // 获取商铺的商品列表
-export const GetShopGoods = () => request.get('/goodsinfo/getGoodsList');
+export const GetShopGoods = (param) => request.get('/goodsinfo/getGoodsList', { params: param });

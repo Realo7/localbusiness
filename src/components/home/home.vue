@@ -45,7 +45,7 @@ export default {
         { id: 2, imgs: 'https://img.yzcdn.cn/vant/apple-2.jpg' },
       ],
       mallslistitem: [],
-      mallsParams: { pageNum: 1, pageSize: 10 },
+      mallsParams: { pageNum: 1, pageSize: 20 },
     };
   },
   mounted() {

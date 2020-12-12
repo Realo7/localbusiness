@@ -6,6 +6,8 @@ import discover from '@/components/discover/discover.vue';
 import order from '@/components/order/order.vue';
 import user from '@/components/user/user.vue';
 import mallslist from '@/components/home/mallslist/mallslist.vue';
+import shopslist from '@/components/home/shopslist/shopslist.vue';
+import shopdetail from '@/components/home/shopdetail/shopdetail.vue';
 
 Vue.use(VueRouter);
 // 解决Vue-Router升级导致的Uncaught(in promise) navigation guard问题
@@ -30,11 +32,12 @@ const routes = [
     children: [
       {
         path: 'mallslist',
-        name: '商场列表',
+        name: 'mallslist',
         component: mallslist,
         meta: {
           ifShowTabbar: true,
         },
+        children: [],
       },
     ],
   },
@@ -61,6 +64,22 @@ const routes = [
       ifShowTabbar: true,
     },
     component: user,
+  },
+  {
+    path: '/shopslist',
+    name: 'shopslist',
+    component: shopslist,
+    meta: {
+      ifShowTabbar: true,
+    },
+  },
+  {
+    path: '/shopdetail',
+    name: 'shopdetail',
+    component: shopdetail,
+    meta: {
+      ifShowTabbar: true,
+    },
   },
 ];
 const router = new VueRouter({

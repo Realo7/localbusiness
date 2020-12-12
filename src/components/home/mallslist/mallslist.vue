@@ -9,9 +9,10 @@
         animation-duration="300"
         @load="onLoad"
       >
-        <SellerListItem :listitem="mallslistitem" @click="gotoshoplist" />
+        <SellerListItem :listitem="mallslistitem" />
       </van-list>
     </van-pull-refresh>
+    <router-view />
   </div>
 </template>
 
@@ -68,9 +69,6 @@ export default {
           console.log(err);
           Toast('请检查获取店铺的网络通讯');
         });
-    },
-    gotoshopslist() {
-      this.$router.push('');
     },
   },
 };
