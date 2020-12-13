@@ -7,4 +7,9 @@ export const GetMall = (param) => request.get('/shopinfo/getMall', { params: par
 export const GetShop = (param) => request.get('/shopinfo/getShopByMall', { params: param });
 
 // 获取商铺的商品列表
-export const GetShopGoods = (param) => request.get('/goodsinfo/getGoodsList', { params: param });
+export const GetGoods = (param) => request.get('/goodsinfo/getGoodsList', { params: param });
+
+// 获取商铺的评价
+export const GetRating = (param) => request.get('/goodsinfo/getrating', { params: param });
+// 获取商铺的信息
+export const GetSeller = (param) => request.get('/goodsinfo/getseller', { params: param });

@@ -64,7 +64,7 @@
 <script>
 import Split from '../split/Split';
 import BScroll from 'better-scroll';
-
+import { GetSeller } from '@/request/api';
 export default {
   components: {
     Split,
@@ -75,11 +75,9 @@ export default {
     };
   },
   created() {
-    fetch('/api/seller')
-      .then((res) => {
-        return res.json();
-      })
+    GetSeller()
       .then((response) => {
+        console.log(response);
         if (response.code === 0) {
           this.seller = response.data;
           this.$nextTick(() => {
@@ -95,7 +93,8 @@ export default {
             this.sellerView = new BScroll(this.$refs.sellerView);
           });
         }
-      });
+      })
+      .catch(() => {});
   },
 };
 </script>
@@ -153,9 +152,6 @@ export default {
   overflow: hidden;
   border-bottom: 1px solid #f4f4f4;
   white-space: nowrap;
-}
-
-.seller .seller-wrapper .seller-view .pics-wrapper .pics-list {
 }
 
 .seller .seller-wrapper .seller-view .pics-wrapper .pics-list .pics-item {

@@ -76,8 +76,8 @@
 import CartControl from '../cartcontrol/CartControl';
 import BScroll from 'better-scroll';
 import Shopcart from '../shopcart/Shopcart';
-import ProductDetail from '../productDetail/ProductDetail';
-
+import ProductDetail from '../productDetail/productDetail';
+import { GetGoods } from '@/request/api';
 export default {
   components: {
     'app-shopcart': Shopcart,
@@ -120,14 +120,13 @@ export default {
     },
   },
   created() {
-    fetch('/api/goods')
-      .then((res) => res.json())
+    GetGoods()
       .then((response) => {
+        console.log(response);
         if (response.code === 0) {
           this.container = response.data.container_operation_source;
           this.goods = response.data.food_spu_tags;
           this.poiInfo = response.data.poi_info;
-
           // DOM已经更新
           this.$nextTick(() => {
             // 执行滚动方法
@@ -136,6 +135,9 @@ export default {
             this.calculateHeight();
           });
         }
+      })
+      .catch((err) => {
+        console.log(err);
       });
   },
   methods: {

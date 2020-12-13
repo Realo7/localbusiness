@@ -3,12 +3,14 @@
     <van-search
       v-model="searchbarvalue"
       show-action
-      label="地址"
       input-align="center"
       background="#4fc08d"
       placeholder="请输入搜索关键词"
       @search="onSearch"
     >
+      <template #left>
+        <div style="padding-right: 15px" @click="gotomap">地址<van-icon name="location" /></div>
+      </template>
       <template #action>
         <div @click="onSearch">搜索</div>
       </template>
@@ -28,6 +30,7 @@
     <router-view></router-view>
   </div>
 </template>
+
 <script>
 import { Toast } from 'vant';
 import { GetMall } from '@/request/api';
@@ -39,6 +42,9 @@ export default {
   props: {},
   data() {
     return {
+      lng: 0, // 经纬度
+      lat: 0,
+      address: '',
       searchbarvalue: '',
       banner: [
         { id: 1, imgs: 'https://img.yzcdn.cn/vant/apple-1.jpg' },
@@ -50,6 +56,7 @@ export default {
   },
   mounted() {
     this.getmallinfo();
+    // this.GetCode();
   },
   methods: {
     onSearch() {
@@ -76,6 +83,10 @@ export default {
     gotomallslist() {
       this.$router.push('/home/mallslist');
     },
+    gotomap() {
+      this.$router.push('/home/amap');
+    },
+    // 获取当前位置
   },
 };
 </script>

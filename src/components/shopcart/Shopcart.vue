@@ -137,7 +137,7 @@ export default {
 };
 </script>
 <style>
-@import url(../../common/css/icon.css);
+/* @import url(../../common/css/icon.css); */
 
 .shopcart-wrapper {
   width: 100%;

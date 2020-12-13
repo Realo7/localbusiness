@@ -8,10 +8,10 @@ import user from '@/components/user/user.vue';
 import mallslist from '@/components/home/mallslist/mallslist.vue';
 import shopslist from '@/components/home/shopslist/shopslist.vue';
 import shopdetail from '@/components/home/shopdetail/shopdetail.vue';
-import Goods from '@/components/goods/Goods';
-import Ratings from '@/components/ratings/Ratings';
-import Seller from '@/components/seller/Seller';
-
+import Goods from '@/components/goods/Goods.vue';
+import Ratings from '@/components/ratings/Ratings.vue';
+import Seller from '@/components/seller/Seller.vue';
+import amap from '@/components/base/amap/amap.vue';
 Vue.use(VueRouter);
 // 解决Vue-Router升级导致的Uncaught(in promise) navigation guard问题
 const originalPush = VueRouter.prototype.push;
@@ -37,6 +37,15 @@ const routes = [
         path: 'mallslist',
         name: 'mallslist',
         component: mallslist,
+        meta: {
+          ifShowTabbar: true,
+        },
+        children: [],
+      },
+      {
+        path: 'amap',
+        name: 'amap',
+        component: amap,
         meta: {
           ifShowTabbar: true,
         },
@@ -84,9 +93,27 @@ const routes = [
       ifShowTabbar: true,
     },
   },
-  { path: '/goods', component: Goods },
-  { path: '/ratings', component: Ratings },
-  { path: '/seller', component: Seller },
+  {
+    path: '/goods',
+    component: Goods,
+    meta: {
+      ifShowTabbar: false,
+    },
+  },
+  {
+    path: '/ratings',
+    component: Ratings,
+    meta: {
+      ifShowTabbar: false,
+    },
+  },
+  {
+    path: '/seller',
+    component: Seller,
+    meta: {
+      ifShowTabbar: false,
+    },
+  },
 ];
 const router = new VueRouter({
   mode: 'history',

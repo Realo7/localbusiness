@@ -14,8 +14,9 @@
 </template>
 
 <script>
-import Header from '@/components/header/Header';
-import Nav from './components/nav/Nav';
+import Header from '@/components/header/Header.vue';
+import Nav from '@/components/nav/Nav.vue';
+import { GetGoods, GetRating } from '@/request/api';
 export default {
   components: {
     'app-header': Header,
@@ -30,21 +31,23 @@ export default {
   },
   created() {
     this.getshopid();
-    fetch('/api/goods')
-      .then((res) => res.json())
+    GetGoods()
       .then((response) => {
+        console.log(response);
         if (response.code === 0) {
           this.poiInfo = response.data.poi_info;
         }
-      });
+      })
+      .catch(() => {});
 
-    fetch('/api/ratings')
-      .then((res) => res.json())
+    GetRating()
       .then((response) => {
+        console.log(response);
         if (response.code === 0) {
           this.commentNum = response.data.comment_num;
         }
-      });
+      })
+      .catch(() => {});
   },
   methods: {
     getshopid() {

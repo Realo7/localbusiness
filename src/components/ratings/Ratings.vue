@@ -1,4 +1,3 @@
-/* eslint-disable vue/eqeqeq */
 <template>
   <div ref="rateView" class="ratings">
     <div class="ratings-wrapper">
@@ -88,7 +87,7 @@
 import BScroll from 'better-scroll';
 import Split from '../split/Split';
 import Star from '../star/Star';
-
+import { GetRating } from '@/request/api';
 const ALL = 2;
 const PICTURE = 1;
 // const COMMENT = 0;
@@ -121,8 +120,7 @@ export default {
     },
   },
   created() {
-    fetch('/api/ratings')
-      .then((res) => res.json())
+    GetRating()
       .then((response) => {
         if (response.code === 0) {
           this.ratings = response.data;
@@ -136,7 +134,8 @@ export default {
             }
           });
         }
-      });
+      })
+      .catch(() => {});
   },
   methods: {
     selectTypeFn(type) {
@@ -248,9 +247,6 @@ export default {
   border-left: 1px solid #9d9d9d;
 }
 
-.ratings .ratings-wrapper .overview .overview-right .delivery-score {
-}
-
 .ratings .ratings-wrapper .overview .overview-right .delivery-score .score {
   font-size: 19px;
   font-weight: 500;
@@ -300,10 +296,6 @@ export default {
   color: black;
 }
 
-.ratings .ratings-wrapper .content .labels-view {
-  /*margin-bottom: 14px;*/
-}
-
 .ratings .ratings-wrapper .content .labels-view .item {
   display: inline-block;
   height: 27px;
@@ -319,9 +311,6 @@ export default {
 
 .ratings .ratings-wrapper .content .labels-view .item.highligh {
   color: #656565;
-}
-
-.ratings .ratings-wrapper .content .rating-list {
 }
 
 .ratings .ratings-wrapper .content .rating-list .comment-item {

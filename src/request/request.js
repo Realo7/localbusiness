@@ -2,7 +2,7 @@ import axios from 'axios';
 
 // 创建一个实例
 const instance = axios.create({
-  baseURL: 'http://localhost:8080/api',
+  baseURL: process.env.VUE_APP_BASE_URL,
   timeout: 5000,
 });
 
