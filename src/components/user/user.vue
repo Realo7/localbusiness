@@ -1,9 +1,22 @@
 <template>
-  <div>这是用户的界面</div>
+  <div class="main">
+    <van-row>
+      <van-cell title="注册商场" is-link url="/mallregist" />
+      <van-cell title="注册商铺" is-link url="/shopregist" />
+    </van-row>
+
+    <van-row> </van-row>
+
+    <van-row> </van-row>
+  </div>
 </template>
 
 <script>
 export default {};
 </script>
 
-<style></style>
+<style>
+.main {
+  height: 100%;
+}
+</style>

@@ -81,10 +81,10 @@ export default {
     },
     // 跳转商场列表
     gotomallslist() {
-      this.$router.push('/home/mallslist');
+      this.$router.push('/mallslist');
     },
     gotomap() {
-      this.$router.push('/home/amap');
+      this.$router.push('/amap');
     },
     // 获取当前位置
   },

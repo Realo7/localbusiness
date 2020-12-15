@@ -13,3 +13,11 @@ export const GetGoods = (param) => request.get('/goodsinfo/getGoodsList', { para
 export const GetRating = (param) => request.get('/goodsinfo/getrating', { params: param });
 // 获取商铺的信息
 export const GetSeller = (param) => request.get('/goodsinfo/getseller', { params: param });
+// 获取所有省市区
+export const GetAllArea = (param) => request.get('/areas/getAllAreaid', { params: param });
+// 文件上传
+export const fileUpload = (param) => request.post('/common/fileUploadfileUpload', param);
+// 商铺注册POST /api/shopinfo/registerShop
+export const sellerRegist = (param) => request.post('/shopinfo/registerShop', param);
+// 根据区县id获取商场 GET /api/shopinfo/getMallByDistrictid
+export const getshopbyDistrictid = (param) => request.get('/shopinfo/getMallByDistrictid', { params: param });
