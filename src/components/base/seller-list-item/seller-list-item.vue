@@ -16,7 +16,7 @@
         <van-button size="mini" @click="gotoshopslist(item.rowguid)">查看详细</van-button>
       </template>
       <template #bottom>
-        <div>距离****米</div>
+        <!-- <div>距离****米</div> -->
       </template>
     </van-card>
   </div>

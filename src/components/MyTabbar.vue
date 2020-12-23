@@ -3,7 +3,7 @@
     <van-tabbar-item to="/home" icon="home-o">首页</van-tabbar-item>
     <van-tabbar-item to="/discover" icon="label-o">发现</van-tabbar-item>
     <van-tabbar-item to="/order" icon="cart-o">订单</van-tabbar-item>
-    <van-tabbar-item to="/user" icon="user-o">我的</van-tabbar-item>
+    <van-tabbar-item to="/user" icon="user-o">开店</van-tabbar-item>
   </van-tabbar>
 </template>
 

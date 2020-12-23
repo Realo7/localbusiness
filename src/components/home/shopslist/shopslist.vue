@@ -23,7 +23,7 @@
         <label>商家电话{{ item.shopphone }}</label>
       </template>
       <template #bottom>
-        <div>距离****米</div>
+        <!-- <div>距离****米</div> -->
       </template>
     </van-card>
   </div>

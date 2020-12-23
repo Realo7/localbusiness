@@ -23,6 +23,19 @@ function ssqmodel(obj) {
   return obj;
 }
 
+function getQueryVariable(variable) {
+  let query = window.location.search.substring(1);
+  let vars = query.split('&');
+  for (let i = 0; i < vars.length; i++) {
+    let pair = vars[i].split('=');
+    // eslint-disable-next-line eqeqeq
+    if (pair[0] == variable) {
+      return pair[1];
+    }
+  }
+  return false;
+}
 module.exports = {
   ssqmode: ssqmodel,
+  getUrlParams: getQueryVariable,
 };

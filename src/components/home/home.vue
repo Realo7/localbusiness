@@ -21,10 +21,10 @@
       </van-swipe-item>
     </van-swipe>
     <van-grid>
-      <van-grid-item icon="gem" text="商场" @click="gotomallslist" />
-      <van-grid-item icon="live" text="美食" />
-      <van-grid-item icon="audio" text="便民" />
-      <van-grid-item icon="invition" text="电影" />
+      <van-grid-item icon="shop-o" text="商场" @click="gotomallslist" />
+      <van-grid-item icon="cart-o" text="超市" @click="gotosupermarket" />
+      <van-grid-item icon="fire-o" text="餐饮" @click="gotofood" />
+      <van-grid-item icon="apps-o" text="综合" @click="gotocomprehensive" />
     </van-grid>
     <SellerListItem :listitem="mallslistitem" />
     <router-view></router-view>
@@ -35,6 +35,7 @@
 import { Toast } from 'vant';
 import { GetMall } from '@/request/api';
 import SellerListItem from '@/components/base/seller-list-item/seller-list-item';
+import { getUrlParams } from '@/assets/utils/utils';
 
 export default {
   name: 'Home',
@@ -56,9 +57,17 @@ export default {
   },
   mounted() {
     this.getmallinfo();
-    // this.GetCode();
+    this.getToken();
   },
   methods: {
+    // 获取token
+    getToken() {
+      let token = getUrlParams('token');
+      console.log('token是' + token);
+      if (token !== null && token !== '' && token !== undefined) {
+        localStorage.setItem('token', token);
+      }
+    },
     onSearch() {
       console.log('搜索');
     },
@@ -83,8 +92,17 @@ export default {
     gotomallslist() {
       this.$router.push('/mallslist');
     },
+    gotosupermarket() {
+      this.$router.push('/supermarket');
+    },
+    gotofood() {
+      this.$router.push('/food');
+    },
     gotomap() {
       this.$router.push('/amap');
+    },
+    gotocomprehensive() {
+      this.$router.push('/comprehensive');
     },
     // 获取当前位置
   },

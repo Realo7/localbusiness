@@ -14,6 +14,11 @@ import Seller from '@/components/seller/Seller.vue';
 import amap from '@/components/base/amap/amap.vue';
 import Shopregist from '@/components/user/shopregist.vue';
 import Mallregist from '@/components/user/mallregist.vue';
+import food from '@/components/home/food/food.vue';
+import supermarket from '@/components/home/supermarket/supermarket.vue';
+import mymall from '@/components/user/mymall.vue';
+import myshop from '@/components/user/myshop.vue';
+import comprehensive from '@/components/home/comprehensive/comprehensive.vue';
 Vue.use(VueRouter);
 // 解决Vue-Router升级导致的Uncaught(in promise) navigation guard问题
 const originalPush = VueRouter.prototype.push;
@@ -91,6 +96,20 @@ const routes = [
     },
   },
   {
+    path: '/mymall',
+    component: mymall,
+    meta: {
+      ifShowTabbar: false,
+    },
+  },
+  {
+    path: '/myshop',
+    component: myshop,
+    meta: {
+      ifShowTabbar: false,
+    },
+  },
+  {
     path: '/shopslist',
     name: 'shopslist',
     component: shopslist,
@@ -102,6 +121,30 @@ const routes = [
     path: '/shopdetail',
     name: 'shopdetail',
     component: shopdetail,
+    meta: {
+      ifShowTabbar: true,
+    },
+  },
+  {
+    path: '/food',
+    name: 'food',
+    component: food,
+    meta: {
+      ifShowTabbar: true,
+    },
+  },
+  {
+    path: '/supermarket',
+    name: 'supermarket',
+    component: supermarket,
+    meta: {
+      ifShowTabbar: true,
+    },
+  },
+  {
+    path: '/comprehensive',
+    name: 'comprehensive',
+    component: comprehensive,
     meta: {
       ifShowTabbar: true,
     },

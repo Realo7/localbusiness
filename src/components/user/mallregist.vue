@@ -10,12 +10,27 @@
         :rules="[{ required: true, message: '请填写商城名字' }]"
       />
       <van-field
-        v-model="jytype"
-        name="jytype"
-        label="经营类型"
-        placeholder="请输入经营类型"
-        :rules="[{ required: true, message: '请输入经营类型' }]"
+        v-model="password"
+        type="password"
+        name="password"
+        label="商城密码"
+        placeholder="商城密码"
+        :rules="[{ required: true, message: '请设置密码' }]"
       />
+
+      <van-field
+        readonly
+        clickable
+        name="picker"
+        :value="areavalue"
+        label="地区"
+        placeholder="点击选择城市"
+        @click="showPicker = true"
+      />
+
+      <van-popup v-model="showPicker" position="bottom">
+        <van-picker show-toolbar :columns="SSQcolumns" @confirm="onConfirm" @cancel="showPicker = false" />
+      </van-popup>
       <van-field
         v-model="shopaddress"
         name="shopaddress"
@@ -37,19 +52,6 @@
         placeholder="请输入负责人电话"
         :rules="[{ required: true, message: '请输入负责人电话' }]"
       />
-      <van-field
-        readonly
-        clickable
-        name="picker"
-        :value="areavalue"
-        label="地区"
-        placeholder="点击选择城市"
-        @click="showPicker = true"
-      />
-
-      <van-popup v-model="showPicker" position="bottom">
-        <van-picker show-toolbar :columns="SSQcolumns" @confirm="onConfirm" @cancel="showPicker = false" />
-      </van-popup>
 
       <van-field name="shoplogo" label="商家logo上传">
         <template #input>
@@ -72,14 +74,14 @@ export default {
   data() {
     return {
       mallname: '', // 商场名称
-      jytype: '', // 经营类型
+      password: '',
       uploader: [], // 上传文件
       invitephone: '', // 介绍人电话
       areavalue: '', // 地区选择器绑定
       shopaddress: '', // 店铺地址
       shopfzr: '', // 负责人
       shopfzrnum: '', // 负责人电话
-      shopType: 0, // 注册类型，0 商城  1 本地服务商家  2 本地服务商场
+      shopType: 2, // 注册类型，0 商城  1 本地服务商家  2 本地服务商场
       SSQcolumns: [], // 省市区的列表
       showPicker: false, // 控制省市区选择器开关
       districtid: '', // 选择器选择的地区id
@@ -139,9 +141,10 @@ export default {
 
     onSubmit(values) {
       console.log('表单内容' + values);
+      values.shopphone = this.shopfzrnum;
       values.shoplogo = this.shoplogo;
       values.districtid = this.districtid;
-      values.shopType = 0;
+      values.shopType = 2;
       sellerRegist(values)
         .then((res) => {
           // 返回数据深拷贝
@@ -158,6 +161,7 @@ export default {
 
     // 地区选择器popup的确认按钮
     onConfirm(value, index) {
+      this.areavalue = '';
       console.log('目录' + index);
       let distid = this.SSQcolumns[index[0]].children[index[1]].children[index[2]].id;
       this.districtid = distid;
