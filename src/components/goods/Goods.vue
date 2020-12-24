@@ -86,6 +86,7 @@ export default {
   },
   data() {
     return {
+      detailParams: { shopid: '', pageNum: 1, pageSize: 50 },
       container: {},
       goods: [],
       poiInfo: {},
@@ -120,13 +121,15 @@ export default {
     },
   },
   created() {
-    GetGoods()
+    this.getshopid();
+    GetGoods(this.detailParams)
       .then((response) => {
         console.log(response);
         if (response.code === 0) {
-          this.container = response.data.container_operation_source;
-          this.goods = response.data.food_spu_tags;
-          this.poiInfo = response.data.poi_info;
+          console.log('获得的商品' + response.data);
+          this.container = response.data.data.container_operation_source;
+          this.goods = response.data.data.food_spu_tags;
+          this.poiInfo = response.data.data.poi_info;
           // DOM已经更新
           this.$nextTick(() => {
             // 执行滚动方法
@@ -141,6 +144,9 @@ export default {
       });
   },
   methods: {
+    getshopid() {
+      this.detailParams.shopid = this.$route.query.shopid;
+    },
     head_bg(imgName) {
       return 'background-image: url(' + imgName + ');';
     },

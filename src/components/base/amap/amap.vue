@@ -1,60 +1,47 @@
 <!-- 地图 -->
 <template>
-  <div class="amap-page-container mainss">
-    <van-nav-bar :title="address" left-text="返回" left-arrow @click-left="onClickLeft" />
-    <el-amap vid="amap" :plugin="plugin" class="amap-demo" :center="center" :zoom="zoom" :events="events">
-      <!-- 点击显示标记 -->
-      <el-amap-marker
-        v-for="(marker, index) in markers"
-        :key="marker.index"
-        :position="marker.position"
-        :icon="marker.icon"
-        :title="marker.title"
-        :events="marker.events"
-        :visible="marker.visible"
-        :draggable="marker.draggable"
-        :vid="index"
-      ></el-amap-marker>
-    </el-amap>
+  <div class="amap-page-container">
+    <van-nav-bar left-text="返回" left-arrow @click-left="onClickLeft" />
+    <div>
+      <el-amap vid="amap" :plugin="plugin" class="amap-demo" :center="center"> </el-amap>
+    </div>
+
+    <div class="toolbar">
+      <span v-if="loaded"> location: lng = {{ lng }} lat = {{ lat }} </span>
+      <span v-else>正在定位</span>
+    </div>
   </div>
 </template>
 
 <script>
 export default {
   data() {
-    let self = this;
+    const self = this;
     return {
-      address: '', // 获取的位置
-      zoom: 14, // 地图缩放
-      center: [121.59996, 31.197646], // 初始中心
-      lng: 0, // 经纬度
+      center: [121.59996, 31.197646],
+      lng: 0,
       lat: 0,
       loaded: false,
-      // 点击显示的标记默认的定位
-      markers: [
-        {
-          position: [121.59996, 31.197646],
-        },
-      ],
-      //  自动定位到当前位置
       plugin: [
         {
+          enableHighAccuracy: true, // 是否使用高精度定位，默认:true
           timeout: 100, // 超过10秒后停止定位，默认：无穷大
+          maximumAge: 0, // 定位结果缓存0毫秒，默认：0
+          convert: true, // 自动偏移坐标，偏移后的坐标为高德坐标，默认：true
+          showButton: true, // 显示定位按钮，默认：true
+          buttonPosition: 'RB', // 定位按钮停靠位置，默认：'LB'，左下角
+          showMarker: true, // 定位成功后在定位到的位置显示点标记，默认：true
+          showCircle: true, // 定位成功后用圆圈表示定位精度范围，默认：true
           panToLocation: true, // 定位成功后将定位到的位置作为地图中心点，默认：true
           zoomToAccuracy: true, // 定位成功后调整地图视野范围使定位位置及精度范围视野内可见，默认：f
+          extensions: 'all',
           pName: 'Geolocation',
           events: {
-            click(e) {
-              // alert(1)
-            },
             init(o) {
               // o 是高德地图定位插件实例
               o.getCurrentPosition((status, result) => {
-                console.log(status, result);
-                console.log(result.formattedAddress);
-
+                console.log(result);
                 if (result && result.position) {
-                  self.address = result.formattedAddress;
                   self.lng = result.position.lng;
                   self.lat = result.position.lat;
                   self.center = [self.lng, self.lat];
@@ -66,40 +53,6 @@ export default {
           },
         },
       ],
-      // 点击地图获取当前位置并显示标记
-      events: {
-        click(e) {
-          let { lng, lat } = e.lnglat;
-          self.lng = lng;
-          self.lat = lat;
-
-          self.markers = [
-            {
-              position: [self.lng, self.lat],
-              icon: '',
-              title: '',
-              events: {
-                click(o) {},
-              },
-            },
-          ];
-          // 这里通过高德 SDK 完成。
-          let geocoder = new this.$AMap.Geocoder({
-            radius: 1000,
-            extensions: 'all',
-          });
-          geocoder.getAddress([lng, lat], function (status, result) {
-            if (status === 'complete' && result.info === 'OK') {
-              if (result && result.regeocode) {
-                self.address = result.regeocode.formattedAddress; // 获取到位置
-                console.log(self.address);
-
-                self.$nextTick();
-              }
-            }
-          });
-        },
-      },
     };
   },
   methods: {
@@ -112,7 +65,7 @@ export default {
 <style>
 .mainss {
   width: 100%;
-  height: 100%;
+  height: 4rem;
   position: absolute;
   top: 0;
   z-index: 99;

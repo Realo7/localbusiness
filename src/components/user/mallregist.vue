@@ -59,9 +59,10 @@
         </template>
       </van-field>
       <van-field v-model="invitephone" name="inviter" label="邀请人手机号" placeholder="邀请人手机(可选)" />
-      <div style="margin: 16px">
+      <div style="margin: 0 16px">
         <van-button round block type="info" native-type="submit"> 提交 </van-button>
       </div>
+      <div style="height: 50px"></div>
     </van-form>
   </div>
 </template>

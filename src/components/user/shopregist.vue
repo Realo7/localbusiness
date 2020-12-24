@@ -1,102 +1,105 @@
 <template>
   <div>
     <van-nav-bar title="商铺注册" left-text="返回" left-arrow @click-left="onClickLeft" />
-    <van-form @submit="onSubmit">
-      <van-field
-        v-model="shopname"
-        name="shopname"
-        label="商铺名"
-        placeholder="商铺名"
-        :rules="[{ required: true, message: '请填写商城名字' }]"
-      />
-      <van-field
-        v-model="password"
-        type="password"
-        name="password"
-        label="商铺密码"
-        placeholder="商铺密码"
-        :rules="[{ required: true, message: '请设置密码' }]"
-      />
-      <van-field
-        readonly
-        clickable
-        name="jytype"
-        :value="jytype"
-        label="经营类型"
-        placeholder="选择经营类型"
-        @click="showPicker3 = true"
-      />
-      <van-popup v-model="showPicker3" position="bottom">
-        <van-picker
-          title="选择您的经营类型"
-          show-toolbar
-          :columns="jytypecolumns"
-          @confirm="onConfirm3"
-          @cancel="showPicker3 = false"
+    <div>
+      <van-form @submit="onSubmit">
+        <van-field
+          v-model="shopname"
+          name="shopname"
+          label="商铺名"
+          placeholder="商铺名"
+          :rules="[{ required: true, message: '请填写商城名字' }]"
         />
-      </van-popup>
-      <van-field
-        readonly
-        clickable
-        name="area"
-        :value="areavalue"
-        label="地区"
-        placeholder="点击选择城市"
-        @click="showPicker1 = true"
-      />
-      <van-popup v-model="showPicker1" position="bottom">
-        <van-picker show-toolbar :columns="SSQcolumns" @confirm="onConfirm1" @cancel="showPicker1 = false" />
-      </van-popup>
-      <van-field
-        v-model="shopaddress"
-        name="shopaddress"
-        label="地址"
-        placeholder="请输入商铺地址"
-        :rules="[{ required: true, message: '请输入商铺地址' }]"
-      />
-      <van-field
-        v-model="shopfzr"
-        name="shopfzr"
-        label="商铺负责人"
-        placeholder="请输入商铺负责人"
-        :rules="[{ required: true, message: '请输入商铺负责人' }]"
-      />
-      <van-field
-        v-model="shopfzrnum"
-        name="shopfzrnum"
-        label="负责人电话"
-        placeholder="请输入商铺负责人电话"
-        :rules="[{ required: true, message: '请输入商铺负责人电话' }]"
-      />
+        <van-field
+          v-model="password"
+          type="password"
+          name="password"
+          label="商铺密码"
+          placeholder="商铺密码"
+          :rules="[{ required: true, message: '请设置密码' }]"
+        />
+        <van-field
+          readonly
+          clickable
+          name="jytype"
+          :value="jytype"
+          label="经营类型"
+          placeholder="选择经营类型"
+          @click="showPicker3 = true"
+        />
+        <van-popup v-model="showPicker3" position="bottom">
+          <van-picker
+            title="选择您的经营类型"
+            show-toolbar
+            :columns="jytypecolumns"
+            @confirm="onConfirm3"
+            @cancel="showPicker3 = false"
+          />
+        </van-popup>
+        <van-field
+          readonly
+          clickable
+          name="area"
+          :value="areavalue"
+          label="地区"
+          placeholder="点击选择城市"
+          @click="showPicker1 = true"
+        />
+        <van-popup v-model="showPicker1" position="bottom">
+          <van-picker show-toolbar :columns="SSQcolumns" @confirm="onConfirm1" @cancel="showPicker1 = false" />
+        </van-popup>
+        <van-field
+          v-model="shopaddress"
+          name="shopaddress"
+          label="地址"
+          placeholder="请输入商铺地址"
+          :rules="[{ required: true, message: '请输入商铺地址' }]"
+        />
+        <van-field
+          v-model="shopfzr"
+          name="shopfzr"
+          label="商铺负责人"
+          placeholder="请输入商铺负责人"
+          :rules="[{ required: true, message: '请输入商铺负责人' }]"
+        />
+        <van-field
+          v-model="shopfzrnum"
+          name="shopfzrnum"
+          label="负责人电话"
+          placeholder="请输入商铺负责人电话"
+          :rules="[{ required: true, message: '请输入商铺负责人电话' }]"
+        />
 
-      <van-field
-        readonly
-        clickable
-        name="parentMallid"
-        :value="parentMall"
-        label="所属商城"
-        placeholder="选择所属商城"
-        @click="showPicker2 = true"
-      />
-      <van-popup v-model="showPicker2" position="bottom">
-        <van-picker
-          title="选择您所属商城"
-          show-toolbar
-          :columns="mallcolumns"
-          @confirm="onConfirm2"
-          @cancel="showPicker2 = false"
+        <van-field
+          readonly
+          clickable
+          name="parentMallid"
+          :value="parentMall"
+          label="所属商城"
+          placeholder="选择所属商城"
+          @click="showPicker2 = true"
         />
-      </van-popup>
-      <van-field name="shoplogo" label="商家logo上传">
-        <template #input>
-          <van-uploader v-model="uploader" :after-read="fileupload" />
-        </template>
-      </van-field>
-      <van-field v-model="invitephone" name="inviter" label="邀请人手机号" placeholder="邀请人手机(可选)" />
-      <div style="margin: 16px">
-        <van-button round block type="info" native-type="submit"> 提交 </van-button>
-      </div>
-    </van-form>
+        <van-popup v-model="showPicker2" position="bottom">
+          <van-picker
+            title="选择您所属商城"
+            show-toolbar
+            :columns="mallcolumns"
+            @confirm="onConfirm2"
+            @cancel="showPicker2 = false"
+          />
+        </van-popup>
+        <van-field name="shoplogo" label="商家logo上传">
+          <template #input>
+            <van-uploader v-model="uploader" :after-read="fileupload" />
+          </template>
+        </van-field>
+        <van-field v-model="invitephone" name="inviter" label="邀请人手机号" placeholder="邀请人手机(可选)" />
+        <div style="margin: 0 14px">
+          <van-button round block type="info" native-type="submit"> 提交 </van-button>
+        </div>
+        <div style="height: 50px"></div>
+      </van-form>
+    </div>
   </div>
 </template>
 
@@ -287,7 +290,10 @@ export default {
     },
     // 商城选择器popup的确认按钮
     onConfirm2(value, index) {
+      this.parentMall = '';
       console.log('目录' + index);
+      this.parentMall = value;
+      this.parentMallid = index + 1;
       this.showPicker2 = false;
     },
     // 经营类型的确认按钮

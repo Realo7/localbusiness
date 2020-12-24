@@ -35,7 +35,7 @@
 import { Toast } from 'vant';
 import { GetMall } from '@/request/api';
 import SellerListItem from '@/components/base/seller-list-item/seller-list-item';
-import { getUrlParams } from '@/assets/utils/utils';
+// import { getUrlParams } from '@/assets/utils/utils';
 
 export default {
   name: 'Home',
@@ -58,14 +58,46 @@ export default {
   mounted() {
     this.getmallinfo();
     this.getToken();
+    // this.getwxinfo();
   },
   methods: {
+    wxLogin() {
+      let appid = 'wx4ff2d58212e9510b';
+      // let appsecret = '3da6cf3cd9df3d981bffe14ac9576cac';
+      // let scope = 'snsapi_userinfo';
+      let redirect_uri = encodeURIComponent('http://www.qilin91.com/api/common/weixinLogin');
+      let ua = window.navigator.userAgent.toLowerCase();
+      // let state = uuid().replace('-', 'S').substring(0, 10).toUpperCase();
+      // eslint-disable-next-line eqeqeq
+      console.log(ua);
+
+      // eslint-disable-next-line eqeqeq
+      if (ua.match(/mobile/i) == 'mobile') {
+        let url =
+          'https://open.weixin.qq.com/connect/oauth2/authorize?appid=' +
+          appid +
+          '&redirect_uri=' +
+          redirect_uri +
+          '&response_type=code&scope=snsapi_userinfo' +
+          '#wechat_redirect';
+        window.location.href = url;
+        // console.log('wewewe' + url);s
+      }
+    },
+    getwxinfo() {
+      // 先检测是否有微信的信息，有的话不调用微信登陆
+      this.wxLogin();
+    },
     // 获取token
     getToken() {
-      let token = getUrlParams('token');
-      console.log('token是' + token);
+      // let token = getUrlParams('token');
+      let token =
+        'Bearer eyJhbGciOiJSUzI1NiIsInppcCI6IkRFRiJ9.eNpMjzEOwjAMRe-SuQMtEGhuYxKjRkqTqnUkEGKEGTZWJjZGBu6DyjEIaahYrPct20_esc6vmGD5clHygk8LnrOMgacqNEFK5y0JUCr7sUKDhH-RQJsxGt3RGDqEVlZj9I2CsKmtws0w-C1Curr2VtM2a53B6IogsSW91hJIOzu0kjtxFEeOxyIlZeTkez8O_fPW36_96fg6X8J3uGmYyPkkvDyflcX-AwAA__8.NZcZ1JR0OxauF9kKXNwBkPbt4PvTpRBh4A2mpgXOxwaev_pGEE5E56mTDBC1gvTfX8xgO1cOHXde7WAcaVimzw';
+
       if (token !== null && token !== '' && token !== undefined) {
         localStorage.setItem('token', token);
+        let tt = localStorage.getItem('token');
+        console.log('token是' + tt);
       }
     },
     onSearch() {

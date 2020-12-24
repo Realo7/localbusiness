@@ -41,6 +41,7 @@ export default {
     return {
       foodshopsParams: { type: 1, pageNum: 1, pageSize: 30 },
       foodshopslistinfo: [],
+      haveshops: true,
     };
   },
   created() {

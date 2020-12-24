@@ -7,7 +7,7 @@ export const GetMall = (param) => request.get('/shopinfo/getMall', { params: par
 export const GetShop = (param) => request.get('/shopinfo/getShopByMall', { params: param });
 
 // 获取商铺的商品列表
-export const GetGoods = (param) => request.get('/goodsinfo/getGoodsList', { params: param });
+export const GetGoods = (param) => request.get('/goodsinfo/getGoodsListByShop', { params: param });
 
 // 获取商铺的评价
 export const GetRating = (param) => request.get('/goodsinfo/getrating', { params: param });
@@ -25,3 +25,7 @@ export const getshopbyDistrictid = (param) => request.get('/shopinfo/getMallByDi
 export const getShopTypes = (param) => request.get('/shopType/getTypes', { params: param });
 // 根据1餐饮、2超市、0综合类型查询独立店铺 GET /api/shopinfo/getShopByType
 export const getKindShop = (param) => request.get('/shopinfo/getShopByType', { params: param });
+// 获取用户店铺
+export const getUserShop = (param) => request.get('/shopinfo/getMyShop', { params: param });
+// 获取用户token /account/getAccountInfo
+export const getAccountInfo = (param) => request.get('/account/getAccountInfo', { params: param });

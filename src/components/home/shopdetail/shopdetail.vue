@@ -26,32 +26,39 @@ export default {
     return {
       poiInfo: {},
       commentNum: 0,
-      detailParams: { shopid: '', pageNum: 1, pageSize: 20 },
+      detailParams: { shopid: '', pageNum: 1, pageSize: 50 },
     };
   },
   created() {
     this.getshopid();
-    GetGoods()
-      .then((response) => {
-        console.log(response);
-        if (response.code === 0) {
-          this.poiInfo = response.data.poi_info;
-        }
-      })
-      .catch(() => {});
-
-    GetRating()
-      .then((response) => {
-        console.log(response);
-        if (response.code === 0) {
-          this.commentNum = response.data.comment_num;
-        }
-      })
-      .catch(() => {});
+    this.getgoods();
   },
   methods: {
     getshopid() {
       this.detailParams.shopid = this.$route.query.shopid;
+    },
+    // 获取评价信息
+
+    // 获取商铺的商品
+    getgoods() {
+      GetGoods(this.detailParams)
+        .then((response) => {
+          console.log(response);
+          if (response.code === 0) {
+            this.poiInfo = response.data.poi_info;
+          }
+        })
+        .catch(() => {});
+    },
+    getrating() {
+      GetRating()
+        .then((response) => {
+          console.log(response);
+          if (response.code === 0) {
+            this.commentNum = response.data.comment_num;
+          }
+        })
+        .catch(() => {});
     },
   },
 };
