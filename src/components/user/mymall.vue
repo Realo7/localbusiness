@@ -49,6 +49,9 @@ export default {
     this.gettoken();
     this.getusershops();
   },
+  mounted() {
+    this.shopmana();
+  },
   methods: {
     gettoken() {
       this.token = localStorage.getItem('token');
@@ -75,10 +78,12 @@ export default {
         .catch((err) => {
           console.log(err);
           this.$toast('请检查服务器连接');
+          that.haveshops = false;
         });
     },
     // 跳转商店商品管理
     shopmana(shopid) {
+      window.location.href = 'http://www.99bianyi.com:8090/WzAdmin/login_init';
       console.log('准备跳转商城管理' + shopid);
     },
   },
