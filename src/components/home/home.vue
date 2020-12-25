@@ -9,7 +9,7 @@
       @search="onSearch"
     >
       <template #left>
-        <div style="padding-right: 15px" @click="gotomap">地址<van-icon name="location" /></div>
+        <div style="padding-right: 15px" @click="gotomap">{{ district }}<van-icon name="location" /></div>
       </template>
       <template #action>
         <div @click="onSearch">搜索</div>
@@ -27,6 +27,7 @@
       <van-grid-item icon="apps-o" text="综合" @click="gotocomprehensive" />
     </van-grid>
     <SellerListItem :listitem="mallslistitem" />
+    <amap style="display: none" />
     <router-view></router-view>
   </div>
 </template>
@@ -36,13 +37,15 @@ import { Toast } from 'vant';
 import { GetMall } from '@/request/api';
 import SellerListItem from '@/components/base/seller-list-item/seller-list-item';
 // import { getUrlParams } from '@/assets/utils/utils';
+import amap from '@/components/base/amap/amap';
 
 export default {
   name: 'Home',
-  components: { SellerListItem },
+  components: { SellerListItem, amap },
   props: {},
   data() {
     return {
+      district: '',
       lng: 0, // 经纬度
       lat: 0,
       address: '',
@@ -58,9 +61,15 @@ export default {
   mounted() {
     this.getmallinfo();
     this.getToken();
+    setTimeout(this.getlocalitem(), 5000);
+
     // this.getwxinfo();
   },
   methods: {
+    getlocalitem() {
+      this.district = localStorage.getItem('district');
+      console.log('地址' + this.district);
+    },
     wxLogin() {
       let appid = 'wx4ff2d58212e9510b';
       // let appsecret = '3da6cf3cd9df3d981bffe14ac9576cac';
